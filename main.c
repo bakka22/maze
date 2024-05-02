@@ -127,11 +127,11 @@ int main()
 					int pic_x = a_x_a - (((int)a_x_a / size) * size);
                                         pic.x = pic_x;
 				}
-				printf("x_coor:%d, pic.x: %d\n",x_coor, pic.x);
+				//printf("x_coor:%d, pic.x: %d\n",x_coor, pic.x);
 
                                 SDL_RenderCopy(instance.renderer, image, &pic, &column);
                         }
-			printf("-----------------------\n");
+			//printf("-----------------------\n");
 			angel = circ(angel - angel_inc, 0, 359);
 		}
 		SDL_RenderPresent(instance.renderer);
