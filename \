@@ -20,7 +20,6 @@ int main()
 	SDL_Texture *weapon = NULL;
 	SDL_Texture *enemy = NULL;
 	float direction = 0;
-	float e_pos[] = {240, 112};
 	float p_pos[] = {80, 128};
 	int e_w, e_h;
 	int size = 32;
@@ -31,7 +30,6 @@ int main()
 	int wep_num = 0;
 	int wep_zig = 4, wep_sh = 0;
 	float angel_inc = 60.0/width;
-	double e_angel;
 	int x_coor = 0;
 	int enemy_flag = 1;
 	int velo = 0, h_velo = 0;
@@ -48,7 +46,7 @@ int main()
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 0, 0, 0, 0, 1, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 2, 0, 0, 0, 0, 0, 1},
 		{1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	};
@@ -76,12 +74,11 @@ int main()
 			return (1);
         }
 	enemy = load(instance.renderer, c);
-	
 	SDL_QueryTexture(enemy, NULL, NULL, &e_w, &e_h);
 	while (!quit)
 	{
 		enemy_flag = 1;
-		int e_x_coor = width/2;
+		int e_x_coor;
 		float e_dist;
 		SDL_SetRenderDrawColor(instance.renderer, 4, 24, 92, 0);
 		SDL_RenderClear(instance.renderer);
@@ -90,25 +87,8 @@ int main()
 		SDL_SetRenderDrawColor(instance.renderer, 12, 61, 2, 0);
 		SDL_RenderFillRect(instance.renderer, &floor);
 		float angel = circ(direction + 30, 0, 359);
-		float e_tan;
 		SDL_Event event;
 		int x_cor_p = 0, y_cor_p = 0;
-		float x_e_p, y_e_p;
-
-		x_e_p = absolute(p_pos[0] - e_pos[0]);
-		y_e_p = absolute(p_pos[1] - e_pos[1]);
-		e_tan = y_e_p / x_e_p;
-		e_angel = atan(e_tan) * 180 / M_PI;
-		if (p_pos[0] > e_pos[0] && p_pos[1] > e_pos[1])
-			e_angel = circ(180 - e_angel, 0, 359);
-		else if (p_pos[0] < e_pos[0] && p_pos[1] < e_pos[1])
-			e_angel = circ(360 - e_angel, 0, 359);
-		else if (p_pos[0] > e_pos[0] && p_pos[1] < e_pos[1])
-			e_angel = circ(e_angel + 180, 0, 359);
-		printf("e_tan: %f\n", e_tan);
-		printf("x_e_p: %f, y_e_p: %f\n", x_e_p, y_e_p);
-		printf("e_angel: %f\n", e_angel);
-		e_dist = sqrt((x_e_p * x_e_p) + (y_e_p * y_e_p));
 		for (x_coor = 0; x_coor < width; x_coor++)
 		{
 			float a_x, a_y, a_x_h, a_y_h, x_a, y_a, wall_distance = 10000, wall_distance_h = 10000, wall_distance_min = 10000, a_y_a, a_x_a;
@@ -133,34 +113,55 @@ int main()
 				y_cor_h = a_y_h / size;
 				x_cor_v = a_x / size;
 				y_cor_v = a_y / size;
-				if (wall_distance > 0 && wall_distance < wall_distance_min && x_cor_v <= 9 && x_cor_v >= 0 && y_cor_v >= 0 && y_cor_v <= 9 && map[x_cor_v][y_cor_v] == 1)
+				if (wall_distance > 0 && wall_distance < wall_distance_min && x_cor_v <= 9 && x_cor_v >= 0 && y_cor_v >= 0 && y_cor_v <= 9 && map[x_cor_v][y_cor_v] > 0)
 				{
-					x_cor = x_cor_v;
-					y_cor = y_cor_v;
-					wall_distance_min = wall_distance;
-					flag = 1;
-				//printf("p_pos: %f, a_x: %f, absolute(a_x - p_pos): %f\n", p_pos[0], a_x, absolute(a_x - p_pos[0]));
-					a_y_a = a_y;
-					a_x_a = a_x;
-					if (x_coor == width/2 - 1)
+					if (map[x_cor_v][y_cor_v] == 1)
 					{
-						y_cor_p = a_y;
-                                        	x_cor_p = a_x;
+						x_cor = x_cor_v;
+						y_cor = y_cor_v;
+						wall_distance_min = wall_distance;
+						flag = 1;
+					//printf("p_pos: %f, a_x: %f, absolute(a_x - p_pos): %f\n", p_pos[0], a_x, absolute(a_x - p_pos[0]));
+						a_y_a = a_y;
+						a_x_a = a_x;
+						if (x_coor == width/2 - 1)
+						{
+							y_cor_p = a_y;
+                                        		x_cor_p = a_x;
+						}
+						e_cal = 0;
 					}
-					
-				}
-				if (wall_distance_h > 0 && wall_distance_h < wall_distance_min && x_cor_h <= 9 && x_cor_h >= 0 && y_cor_h >= 0 && y_cor_h <= 9 && map[x_cor_h][y_cor_h] == 1)
-				{
-					x_cor = x_cor_h;
-                                       	y_cor = y_cor_h;
-					wall_distance_min = wall_distance_h;
-					flag = 2;
-					a_y_a = a_y_h;
-					a_x_a = a_x_h;
-					if (x_coor == width/2 - 1)
+					if (map[x_cor_v][y_cor_v] == 2 && e_cal)
 					{
-						y_cor_p = a_y_h;
-                                        	x_cor_p = a_x_h;
+						e_x_coor = x_coor;
+						e_dist = wall_distance;
+						enemy_flag = 0;
+						printf("vertical enemy recorded at: %d, dist: %f\n", e_x_coor, e_dist);
+					}
+				}
+				if (wall_distance_h > 0 && wall_distance_h < wall_distance_min && x_cor_h <= 9 && x_cor_h >= 0 && y_cor_h >= 0 && y_cor_h <= 9 && map[x_cor_h][y_cor_h] > 0)
+				{
+					if (map[x_cor_h][y_cor_h] == 1)
+					{
+						x_cor = x_cor_h;
+                                        	y_cor = y_cor_h;
+						wall_distance_min = wall_distance_h;
+						flag = 2;
+						a_y_a = a_y_h;
+						a_x_a = a_x_h;
+						if (x_coor == width/2 - 1)
+						{
+							y_cor_p = a_y_h;
+                                        		x_cor_p = a_x_h;
+						}
+						e_cal = 0;
+					}
+					if (map[x_cor_v][y_cor_v] == 2 && e_cal)
+					{
+						e_x_coor = x_coor;
+						e_dist = wall_distance_h;
+						enemy_flag = 0;
+						printf("horizontal enemy recorded at: %d, dist: %f\n", e_x_coor, e_dist);
 					}
 				}
 				a_y_h = calc_y_h(a_y_h, angel, size, 2);
@@ -173,7 +174,6 @@ int main()
 			}
 			//printf("wall cell: (%d, %d)\n", x_cor, y_cor);
 			//printf("wall distance: %f\n", wall_distance_min);
-
 			if (x_cor <= 9 && x_cor >= 0 && y_cor >= 0 && y_cor <= 9 && map[x_cor][y_cor] == 1)
 			{
 				//printf("wall_distance: %f\n", wall_distance_min);
@@ -201,12 +201,6 @@ int main()
                                 SDL_RenderCopy(instance.renderer, image, &pic, &column);
                         }
 			//printf("-----------------------\n");
-			if (e_angel >= angel && e_angel < angel + angel_inc && e_dist < wall_distance_min)
-			{
-				e_x_coor = x_coor;
-				enemy_flag = 0;
-				printf("e_angel: %f, angel: %f, e_x_coor: %d\n", e_angel, angel, e_x_coor);
-			}
 			angel = circ(angel - angel_inc, 0, 359);
 		}
 		if(!enemy_flag)

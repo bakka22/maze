@@ -7,7 +7,7 @@ SDL_Texture *load(SDL_Renderer *renderer, int n)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *texture = NULL;
-	char *images[] = {"foo.png", "walls/tile06.jpg", "walls/tile25.jpg", "background.png", "soccer.jpg"};
+	char *images[] = {"wall.jpg", "base.png", "shoot.png", "akbase.png", "akshoot.png", "rain1.png", "rain2.png", "rain3.png", "rain4.png", "rain5.png", "rain6.png", "rain7.png", "rain8.png", "rain9.png", "rain10.png", "demon.jpg"};
 	image = IMG_Load(images[n]);
 	if (!image)
 	{
@@ -16,8 +16,15 @@ SDL_Texture *load(SDL_Renderer *renderer, int n)
 	}
 	if (n == 0)
 		SDL_SetColorKey(image, SDL_TRUE, SDL_MapRGB(image->format, 0, 255, 255));
-	if (n == 2)
-		SDL_SetColorKey(image, SDL_TRUE, SDL_MapRGB(image->format, 20, 244, 10));
+	if (n >= 1 && n < 15)
+	{
+		SDL_SetColorKey(image, SDL_TRUE, SDL_MapRGB(image->format, 0, 0, 0));
+		//SDL_SetColorKey(image, SDL_TRUE, SDL_MapRGB(image->format, 219, 219, 219));
+	}
+	if (n == 15)
+	{
+		SDL_SetColorKey(image, SDL_TRUE, SDL_MapRGB(image->format, 255, 255, 255));
+	}
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	if (texture == NULL)
 		return NULL;
