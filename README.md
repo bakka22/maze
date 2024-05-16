@@ -52,9 +52,13 @@ a line represents a row which has width columns.
 for example if the dimensions of the map is 6, 5 the map would look something like this:
 
 1, 1, 1, 1, 1, 1;
+
 1, 0, 0, 0, 0, 1;
+
 1, 0, 0, 0, 0, 1;
+
 1, 0, 0, 0, 0, 1;
+
 1, 1, 1, 1, 1, 1;
 
 **NOTE: it is very important that the dimensions provided are consistant
