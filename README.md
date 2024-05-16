@@ -7,6 +7,13 @@ from it and I enjoyed coding every bit of it. being a simple
 game I focused on graphics to get the ultimate experience 
 from it.
 
+project blog post: https://www.linkedin.com/posts/abobaker-eltom-3a1a90147_activity-7196348105389178881-eytZ?utm_source=share&utm_medium=member_desktop .
+My linkedin Profile:  https://www.linkedin.com/in/abobaker-eltom-3a1a90147/ .
+
+![wep1](https://github.com/bakka22/maze/assets/135711566/257628d2-c656-4924-b186-e295370b2e04)
+
+
+
 * Installation:
 	use gcc compiler with SDL flags to compile all .c files to make the executable.
 	gcc *.c -o <executable_name> `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image 
@@ -49,6 +56,7 @@ with the rows and columns of the map, otherwize the game might crash.
 
 * Contribution:
 abobaker altom babiker <abobakereltom@gmail.com> .
+
 
 
 
