@@ -89,3 +89,7 @@ after a lot of papers, math and youtube tutorials i was finally able to solve bo
 for creating the window and rendering everything on it, I used SDL (Simple DirectMedia Layer) library in C, its simpleness and ease of use made it a great choice to work with.
 
 
+I learned so much from this project, for instance when i first heard about ray casting i couldn't imagine how would i cast a ray using only code, but when i delved deeper i understood it is just math, this changed my perspective on how i was viewing things, that in programming we only care about the characteristics of the thing not the thing in essence.
+working with SDL was really fun, i learned how things are rendered on the screen and the basics of game making.
+I used to think that game developing is too complicated for me and i should stick to web developing but after this project i might think seriously about considering game developing as a path i would go into.
+As a passionate and determined individual, I thrive on challenges that push me to grow and learn. My journey with developing the maze game using ray casting was both exhilarating and enlightening. Through overcoming various obstacles and refining my coding skills, I discovered a deep sense of satisfaction in bringing ideas to life. Beyond programming, I am an avid learner who enjoys exploring new technologies and embracing opportunities for personal and professional development. I am excited to continue my journey of creativity, innovation, and self-discovery in the world of game development and beyond
