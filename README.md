@@ -50,6 +50,7 @@ represents the map.
 use 1 to represent a wall and 0 for no wall.
 a line represents a row which has width columns.
 for example if the dimensions of the map is 6, 5 the map would look something like this:
+
 1, 1, 1, 1, 1, 1;
 
 1, 0, 0, 0, 0, 1;
