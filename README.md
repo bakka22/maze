@@ -74,9 +74,11 @@ Technologies used to develop the game:
 So the idea of Ray Casting is to make a 3D world out of a 2D world, a 2D world which consists of a grid containing cells and each cell either contains a wall or it doesn't.
 so according to the player's position and the direction it's facing, rays are casted, and when a ray hits the wall it records the distance from the player, and this distance is then used to render the the wall on the screen, for example if the distance is small the wall would appear bigger and for greater the distance the smaller the wall would appear.
 for example: the following picture shows a 2D world
+
 ![image](https://github.com/bakka22/maze/assets/135711566/8a78f113-7be9-49c6-9e51-76a6580ad878)
 
 and the final 3D world would look something like this:
+
 ![image](https://github.com/bakka22/maze/assets/135711566/26a7d025-3231-4f6d-b979-998880eaa3e0)
 
 As simple as ray casting algorithm might seem, it took more than a week to implement it, I would wake up every day, bring a white paper and a pen and do the math manually, but when i turn it into code it doesn't work, at first I refused to watch a youtube tutorial about ray casting but after a lot of failure i decided to watch one, and i still couldn't get it 🤣
